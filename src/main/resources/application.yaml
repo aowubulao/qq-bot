@@ -1,2 +1,8 @@
 server:
   port: 8967
+spring:
+  thymeleaf:
+    prefix: classpath:/templates/
+logging:
+  file:
+    name: logs/bot.log
