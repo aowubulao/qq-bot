@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @date 2020/11/29
  */
 @RestController
-@RequestMapping("/bot")
+@RequestMapping("/bot/api")
 public class BotController {
 
     @Autowired
