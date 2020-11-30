@@ -7,6 +7,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
  * @author Neo.Zzj
+ * @date 2020/11/30
  */
 @Configuration
 public class FilterConfig implements WebMvcConfigurer {
