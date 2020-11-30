@@ -1,6 +1,7 @@
-package com.neoniou.bot.mvc.service;
+package com.neoniou.bot.mvc.service.impl;
 
 import com.neoniou.bot.mirai.core.MiraiBot;
+import com.neoniou.bot.mvc.service.BotService;
 import org.springframework.stereotype.Service;
 
 /**
