@@ -3,6 +3,10 @@ server:
 spring:
   thymeleaf:
     prefix: classpath:/templates/
+  application:
+    name: bot-service
+  main:
+    allow-bean-definition-overriding: true
 logging:
   file:
     name: logs/bot.log
