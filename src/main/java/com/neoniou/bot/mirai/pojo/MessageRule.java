@@ -1,8 +1,7 @@
 package com.neoniou.bot.mirai.pojo;
 
-import cn.hutool.crypto.digest.DigestAlgorithm;
-import cn.hutool.crypto.digest.Digester;
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.*;
 import java.util.HashMap;
@@ -17,6 +16,7 @@ import java.util.Map;
  * @date 2020/12/4
  */
 @Data
+@Slf4j
 public class MessageRule implements Serializable {
 
     /**
@@ -38,21 +38,22 @@ public class MessageRule implements Serializable {
 
     private Map<Integer, Rule> ruleMap = new HashMap<>();
 
-    public MessageRule load() throws IOException, ClassNotFoundException {
-        FileInputStream fis = new FileInputStream(FILE);
-        ObjectInputStream ois = new ObjectInputStream(fis);
-        MessageRule rule = (MessageRule) ois.readObject();
-        ois.close();
-        fis.close();
-        return rule;
+    public MessageRule load() {
+        try (FileInputStream fis = new FileInputStream(FILE); ObjectInputStream ois = new ObjectInputStream(fis)) {
+            return (MessageRule) ois.readObject();
+        } catch (Exception e) {
+            log.info("读取messageRule.cer错误：", e);
+            return null;
+        }
     }
 
-    public MessageRule write(MessageRule rule) throws IOException {
-        FileOutputStream fileOut = new FileOutputStream(FILE);
-        ObjectOutputStream out = new ObjectOutputStream(fileOut);
-        out.writeObject(rule);
-        out.close();
-        fileOut.close();
-        return rule;
+    public MessageRule write(MessageRule rule) {
+        try (FileOutputStream fileOut = new FileOutputStream(FILE); ObjectOutputStream out = new ObjectOutputStream(fileOut)) {
+            out.writeObject(rule);
+            return rule;
+        } catch (Exception e) {
+            log.info("写入messageRule.cer错误：", e);
+            return null;
+        }
     }
 }
