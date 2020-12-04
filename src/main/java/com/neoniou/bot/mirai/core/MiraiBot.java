@@ -35,7 +35,7 @@ public class MiraiBot {
         Events.registerEvents(bot, new SimpleListenerHost() {
             @EventHandler
             public ListeningStatus onGroupMessage(GroupMessageEvent event) {
-                MessageHandler.handleMessage(event);
+                CommonMessageHandler.handleMessage(event);
 
                 return ListeningStatus.LISTENING;
             }
