@@ -1,7 +1,8 @@
-package com.neoniou.bot.mirai.handler;
+package com.neoniou.bot.mirai.handler.impl;
 
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
+import com.neoniou.bot.mirai.handler.MessageHandler;
 import net.mamoe.mirai.message.GroupMessageEvent;
 
 /**
@@ -29,15 +30,10 @@ public class BiliMiniAppHandler implements MessageHandler {
     private static final String SUB_STR = "]";
 
     @Override
-    public void handleMessage(GroupMessageEvent event) {
+    public void handleMessage(GroupMessageEvent event, String sendMessage) {
         String msgString = event.getMessage().toString();
         String msgBody = msgString.substring(msgString.indexOf(SUB_STR) + 1);
         event.getGroup().sendMessage(generateMsg(parse2Json(msgBody)));
-    }
-
-    @Override
-    public void handleMessage(GroupMessageEvent event, String sendMessage) {
-
     }
 
     private static String generateMsg(JSONObject json) {

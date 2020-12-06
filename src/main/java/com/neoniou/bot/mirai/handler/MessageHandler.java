@@ -9,13 +9,6 @@ import net.mamoe.mirai.message.GroupMessageEvent;
 public interface MessageHandler {
 
     /**
-     * 接收群消息事件
-     *
-     * @param event GroupMessageEvent
-     */
-    void handleMessage(GroupMessageEvent event);
-
-    /**
      * 接收群消息，发送消息
      *
      * @param event GroupMessageEvent
