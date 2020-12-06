@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.io.*;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -36,7 +37,7 @@ public class MessageRule implements Serializable {
 
     private static final String FILE = System.getProperty("user.dir") + "/config/messageRule.cer";
 
-    private Map<Integer, Rule> ruleMap = new HashMap<>();
+    private Map<Integer, List<Rule>> ruleMap = new HashMap<>();
 
     public MessageRule load() {
         try (FileInputStream fis = new FileInputStream(FILE); ObjectInputStream ois = new ObjectInputStream(fis)) {
