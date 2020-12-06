@@ -24,7 +24,7 @@ public class MiraiBot {
     public static void start() {
         log.info("Mirai Bot开始启动...");
         //启动Bot
-        bot = BotFactoryJvm.newBot(BotInfo.qq, BotInfo.password, new BotConfiguration() {
+        bot = BotFactoryJvm.newBot(BotCoreConfig.qq, BotCoreConfig.password, new BotConfiguration() {
             {
                 fileBasedDeviceInfo(System.getProperty("user.dir") + "/config/deviceInfo.json");
             }
@@ -45,16 +45,16 @@ public class MiraiBot {
                 throw new RuntimeException("在事件处理中发生异常", exception);
             }
         });
-        BotInfo.isActive = true;
+        BotCoreConfig.isActive = true;
         bot.join();
     }
 
     public static void close() {
-        BotInfo.isActive = false;
+        BotCoreConfig.isActive = false;
         bot.close(new Throwable());
     }
 
     public static boolean botStatus() {
-        return BotInfo.isActive;
+        return BotCoreConfig.isActive;
     }
 }

@@ -1,5 +1,6 @@
 package com.neoniou.bot.mirai.core;
 
+import com.neoniou.bot.mirai.pojo.MessageRule;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.FileInputStream;
@@ -12,7 +13,7 @@ import java.util.Properties;
  * @date 2020/11/29
  */
 @Slf4j
-public class BotInfo {
+public class BotCoreConfig {
 
     public static Long qq;
 
@@ -22,7 +23,18 @@ public class BotInfo {
 
     public static boolean isActive = false;
 
+    public static MessageRule messageRule;
+
     static {
+        readBotInfoProps();
+        getMessageRule();
+    }
+
+    public static void updateMessageRule(MessageRule newRule) {
+        messageRule = messageRule.write(newRule);
+    }
+
+    private static void readBotInfoProps() {
         try {
             Properties props = new Properties();
             InputStream is = new FileInputStream(System.getProperty("user.dir") + "/config/bot.properties");
@@ -33,5 +45,10 @@ public class BotInfo {
         } catch (IOException e) {
             log.info("读取bot.properties错误: ", e);
         }
+    }
+
+    private static void getMessageRule() {
+        messageRule = new MessageRule();
+        messageRule = messageRule.load();
     }
 }
