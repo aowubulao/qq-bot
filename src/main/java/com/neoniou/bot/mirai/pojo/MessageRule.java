@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.io.*;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
@@ -36,11 +37,11 @@ public class MessageRule implements Serializable {
 
     private static final String FILE = System.getProperty("user.dir") + "/config/messageRule.cer";
 
-    private Map<String, Rule> regularMap = new HashMap<>();
+    private Map<String, Rule> regularMap = new LinkedHashMap<>();
 
-    private Map<String, Rule> equalMap = new HashMap<>();
+    private Map<String, Rule> equalMap = new LinkedHashMap<>();
 
-    private Map<String, Rule> containsMap = new HashMap<>();
+    private Map<String, Rule> containsMap = new LinkedHashMap<>();
 
     public Map<String, Rule> getRuleMap(int matching) {
         if (matching == REGULAR) {

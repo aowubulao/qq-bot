@@ -15,7 +15,7 @@ public class FilterConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         InterceptorRegistration registration = registry.addInterceptor(new TokenFilter());
-        registration.addPathPatterns("/bot/api/*");
+        registration.addPathPatterns("/bot/api/**");
         registration.excludePathPatterns("/bot/api/login");
     }
 }
