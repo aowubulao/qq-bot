@@ -5,11 +5,13 @@ import cn.hutool.json.JSONUtil;
 import com.neoniou.bot.mirai.handler.MessageHandler;
 import net.mamoe.mirai.message.GroupMessageEvent;
 
+import java.io.Serializable;
+
 /**
  * @author Neo.Zzj
  * @date 2020/12/4
  */
-public class BiliMiniAppHandler implements MessageHandler {
+public class BiliMiniAppHandler implements MessageHandler, Serializable {
 
     private static final String REPLACE_STR_1 = "[[QQ小程序]哔哩哔哩]请使用最新版本手机QQ查看";
 

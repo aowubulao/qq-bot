@@ -25,7 +25,7 @@ public class Rule implements Serializable {
     /**
      * 使用的 handler
      */
-    private MessageHandler messageHandler;
+    private String messageHandler;
 
     /**
      * 是否启用
