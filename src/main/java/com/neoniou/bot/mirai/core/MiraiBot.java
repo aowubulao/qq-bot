@@ -57,4 +57,8 @@ public class MiraiBot {
     public static boolean botStatus() {
         return BotCoreConfig.isActive;
     }
+
+    public static Bot getBot() {
+        return bot;
+    }
 }
