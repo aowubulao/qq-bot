@@ -1,5 +1,6 @@
 package com.neoniou.bot;
 
+import com.neoniou.bot.mirai.core.MiraiBot;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -22,6 +23,7 @@ public class BotApplication {
     public static void main(String[] args) throws Exception {
         ConfigurableApplicationContext context = SpringApplication.run(BotApplication.class, args);
         printFrontIpAddr(context);
+        MiraiBot.start();
     }
 
     private static void printFrontIpAddr(ConfigurableApplicationContext context) throws Exception {

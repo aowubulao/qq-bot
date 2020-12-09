@@ -1,6 +1,7 @@
 package com.neoniou.bot.mirai.handler;
 
 import com.neoniou.bot.mirai.handler.impl.BiliMiniAppHandler;
+import com.neoniou.bot.mirai.handler.impl.SetuHandler;
 import com.neoniou.bot.mirai.handler.impl.SimpleMessageHandler;
 
 import java.util.HashMap;
@@ -16,6 +17,8 @@ public class MessageHandlerFactory {
 
     private static final String SIMPLE_HANDLER = "SimpleMessageHandler";
 
+    private static final String SETU_HANDLER = "SetuHandler";
+
     private static final Map<String, MessageHandler> HANDLER_MAP = new HashMap<>();
 
     static {
@@ -29,5 +32,6 @@ public class MessageHandlerFactory {
     private static void createHandlerMap() {
         HANDLER_MAP.put(BILI_HANDLER, new BiliMiniAppHandler());
         HANDLER_MAP.put(SIMPLE_HANDLER, new SimpleMessageHandler());
+        HANDLER_MAP.put(SETU_HANDLER, new SetuHandler());
     }
 }
