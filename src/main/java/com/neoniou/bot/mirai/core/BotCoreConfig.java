@@ -1,5 +1,6 @@
 package com.neoniou.bot.mirai.core;
 
+import com.neoniou.bot.mirai.pojo.ImageIndex;
 import com.neoniou.bot.mirai.pojo.MessageRule;
 import lombok.extern.slf4j.Slf4j;
 
@@ -25,9 +26,12 @@ public class BotCoreConfig {
 
     public static MessageRule messageRule;
 
+    public static ImageIndex imageIndex;
+
     static {
         readBotInfoProps();
         getMessageRule();
+        getImageIndex();
     }
 
     public static void updateMessageRule(MessageRule newRule) {
@@ -50,5 +54,10 @@ public class BotCoreConfig {
     private static void getMessageRule() {
         messageRule = new MessageRule();
         messageRule = messageRule.load();
+    }
+
+    private static void getImageIndex() {
+        imageIndex = new ImageIndex();
+        imageIndex = imageIndex.load();
     }
 }
