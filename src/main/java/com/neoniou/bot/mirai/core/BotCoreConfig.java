@@ -1,5 +1,6 @@
 package com.neoniou.bot.mirai.core;
 
+import com.neoniou.bot.mirai.handler.other.LiveMessageHandler;
 import com.neoniou.bot.mirai.pojo.ImageIndex;
 import com.neoniou.bot.mirai.pojo.MessageRule;
 import lombok.extern.slf4j.Slf4j;
@@ -36,6 +37,10 @@ public class BotCoreConfig {
 
     public static void updateMessageRule(MessageRule newRule) {
         messageRule = messageRule.write(newRule);
+    }
+
+    public static void startMonitorLive() {
+        new LiveMessageHandler().startMonitor();
     }
 
     private static void readBotInfoProps() {

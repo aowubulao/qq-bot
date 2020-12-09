@@ -46,6 +46,7 @@ public class MiraiBot {
             }
         });
         BotCoreConfig.isActive = true;
+        BotCoreConfig.startMonitorLive();
         bot.join();
     }
 
