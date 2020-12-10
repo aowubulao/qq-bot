@@ -52,7 +52,6 @@ public class LiveMessageHandler {
             new Thread(() -> {
                 while (true) {
                     boolean live = isLive(roomId[fi]);
-                    log.info("{} 检测一次，状态：{}", roomId[fi], live);
                     if (!b[fi] && live) {
                         b[fi] = true;
                         String message = "开播了~\n直播间地址：\nhttps://live.bilibili.com/" + roomId[fi];

@@ -41,6 +41,10 @@ public class SetuHandler implements MessageHandler {
             event.getGroup().sendMessage(quote.plus(OVERTIME_MESSAGE));
         } else {
             ImageInfo imageInfo = getSetu(event.getMessage().toString());
+            if (imageInfo == null) {
+                event.getGroup().sendMessage("没有相关的涩图");
+                return;
+            }
             event.getGroup().sendMessage("标题：" + imageInfo.getTitle() +
                     "\n图片链接：" + imageInfo.getUrl());
 

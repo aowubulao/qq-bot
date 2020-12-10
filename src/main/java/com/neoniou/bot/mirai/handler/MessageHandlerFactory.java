@@ -1,6 +1,7 @@
 package com.neoniou.bot.mirai.handler;
 
 import com.neoniou.bot.mirai.handler.impl.BiliMiniAppHandler;
+import com.neoniou.bot.mirai.handler.impl.SearchAnimeHandler;
 import com.neoniou.bot.mirai.handler.impl.SetuHandler;
 import com.neoniou.bot.mirai.handler.impl.SimpleMessageHandler;
 
@@ -19,6 +20,8 @@ public class MessageHandlerFactory {
 
     private static final String SETU_HANDLER = "SetuHandler";
 
+    private static final String SEARCH_ANIME_HANDLER = "SearchAnimeHandler";
+
     private static final Map<String, MessageHandler> HANDLER_MAP = new HashMap<>();
 
     static {
@@ -33,5 +36,6 @@ public class MessageHandlerFactory {
         HANDLER_MAP.put(BILI_HANDLER, new BiliMiniAppHandler());
         HANDLER_MAP.put(SIMPLE_HANDLER, new SimpleMessageHandler());
         HANDLER_MAP.put(SETU_HANDLER, new SetuHandler());
+        HANDLER_MAP.put(SEARCH_ANIME_HANDLER, new SearchAnimeHandler());
     }
 }

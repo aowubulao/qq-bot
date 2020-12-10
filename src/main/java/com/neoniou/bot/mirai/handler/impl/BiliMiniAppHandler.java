@@ -3,6 +3,7 @@ package com.neoniou.bot.mirai.handler.impl;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.neoniou.bot.mirai.handler.MessageHandler;
+import com.neoniou.bot.utils.HandlerUtil;
 import net.mamoe.mirai.message.GroupMessageEvent;
 
 import java.io.Serializable;
@@ -29,12 +30,9 @@ public class BiliMiniAppHandler implements MessageHandler, Serializable {
 
     private static final String QM = "?";
 
-    private static final String SUB_STR = "]";
-
     @Override
     public void handleMessage(GroupMessageEvent event, String sendMessage) {
-        String msgString = event.getMessage().toString();
-        String msgBody = msgString.substring(msgString.indexOf(SUB_STR) + 1);
+        String msgBody = HandlerUtil.getMessageBody(event);
         event.getGroup().sendMessage(generateMsg(parse2Json(msgBody)));
     }
 
