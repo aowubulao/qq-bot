@@ -2,7 +2,6 @@ package com.neoniou.bot.mirai.handler.impl;
 
 import cn.hutool.core.codec.Base64;
 import cn.hutool.http.HttpRequest;
-import cn.hutool.json.JSONArray;
 import cn.hutool.json.JSONUtil;
 import com.neoniou.bot.mirai.core.MiraiBot;
 import com.neoniou.bot.mirai.handler.MessageHandler;
@@ -12,7 +11,9 @@ import net.mamoe.mirai.Bot;
 import net.mamoe.mirai.message.GroupMessageEvent;
 import net.mamoe.mirai.message.data.MessageUtils;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Neo.Zzj
@@ -46,12 +47,18 @@ public class SearchAnimeHandler implements MessageHandler {
         SearchResult searchResult = getSearchResult(imageUrl);
         List<AnimeInfo> infos = searchResult.getDocs();
 
-        sb.append("搜索结果共：").append(infos.size()).append("个\n");
+        sb.append("搜索结果：");
+        Map<String, String> map = new HashMap<>();
         for (int i = 1; i <= infos.size(); i++) {
-            sb.append("第").append(i).append("个：\n");
-            generateMessage(infos.get(i - 1), sb);
-            if (i != infos.size()) {
-                sb.append("\n");
+            AnimeInfo animeInfo = infos.get(i - 1);
+            String key = animeInfo.getTitle() + animeInfo.getEpisode();
+            if (!map.containsKey(key)) {
+                map.put(key, "");
+                sb.append("\n第").append(map.size()).append("个：");
+                generateMessage(animeInfo, sb);
+            }
+            if (map.size() >= 2) {
+                break;
             }
         }
 
@@ -73,13 +80,16 @@ public class SearchAnimeHandler implements MessageHandler {
 
     private void generateMessage(AnimeInfo animeInfo, StringBuilder sb) {
         String similarity = animeInfo.getSimilarity().substring(0, 5);
-        sb.append("相似度:").append(similarity).append("\n");
+        sb.append("相似度：").append(similarity).append("\n");
         sb.append("动漫：").append(animeInfo.getTitle()).append("(").append(animeInfo.getTitleChinese()).append(")\n");
         double d = Double.parseDouble(animeInfo.getAt());
         int m = (int) (d / 60);
         int s = (int) (d - m * 60);
-        sb.append("具体位置：第").append(animeInfo.getEpisode()).append("集 ")
-                .append(m).append("分").append(s).append("秒");
+        sb.append("具体位置：");
+        if (!"".equals(animeInfo.getEpisode())) {
+            sb.append("第").append(animeInfo.getEpisode()).append("集 ");
+        }
+        sb.append(m).append("分").append(s).append("秒");
     }
 
     @Data

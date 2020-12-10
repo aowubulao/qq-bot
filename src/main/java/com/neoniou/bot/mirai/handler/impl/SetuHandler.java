@@ -2,17 +2,17 @@ package com.neoniou.bot.mirai.handler.impl;
 
 import cn.hutool.cache.CacheUtil;
 import cn.hutool.cache.impl.TimedCache;
+import cn.hutool.http.HttpRequest;
 import com.neoniou.bot.mirai.core.BotCoreConfig;
 import com.neoniou.bot.mirai.handler.MessageHandler;
 import com.neoniou.bot.mirai.pojo.ImageIndex;
 import com.neoniou.bot.mirai.pojo.ImageInfo;
-import com.neoniou.bot.utils.DownloadUtil;
 import net.mamoe.mirai.contact.Member;
 import net.mamoe.mirai.message.GroupMessageEvent;
 import net.mamoe.mirai.message.data.Image;
 import net.mamoe.mirai.message.data.QuoteReply;
 
-import java.io.File;
+import java.io.InputStream;
 
 /**
  * @author Neo.Zzj
@@ -67,10 +67,9 @@ public class SetuHandler implements MessageHandler {
         return message.substring(message.indexOf(ZHANG) + 1, message.indexOf(DE));
     }
 
-    private File getImageFile(String url) {
-        String path = System.getProperty("user.dir") + "/config/setu/img/";
-        String fileName = DownloadUtil.download(path, url);
-
-        return new File(path + fileName);
+    private InputStream getImageFile(String url) {
+        return HttpRequest.get(url)
+                .execute()
+                .bodyStream();
     }
 }
