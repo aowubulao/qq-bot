@@ -48,18 +48,21 @@ public class LiveMessageHandler {
     public void startMonitor() {
         boolean[] b = new boolean[roomId.length];
         for (int i = 0; i < roomId.length; i++) {
-            int finalI = i;
+            int fi = i;
             new Thread(() -> {
-                boolean live = isLive(roomId[finalI]);
-                if (!b[finalI] && live) {
-                    b[finalI] = true;
-                    String message = "开播了~\n直播间地址：\nhttps://live.bilibili.com/" + roomId[finalI];
-                    new GroupMessageSender().sendMessage(Long.parseLong(alertGroup[finalI]), message);
+                while (true) {
+                    boolean live = isLive(roomId[fi]);
+                    log.info("{} 检测一次，状态：{}", roomId[fi], live);
+                    if (!b[fi] && live) {
+                        b[fi] = true;
+                        String message = "开播了~\n直播间地址：\nhttps://live.bilibili.com/" + roomId[fi];
+                        new GroupMessageSender().sendMessage(Long.parseLong(alertGroup[fi]), message);
+                    }
+                    if (b[fi] && !live) {
+                        b[fi] = false;
+                    }
+                    ThreadUtil.sleep(60 * 1000);
                 }
-                if (b[finalI] && !live) {
-                    b[finalI] = false;
-                }
-                ThreadUtil.sleep(60 * 1000);
             }).start();
         }
     }
